@@ -1,17 +1,6 @@
 import streamlit as st
-import subprocess
-import sys
-from datetime import datetime, timedelta
-from io import BytesIO
-
-# Cài openpyxl nếu chưa có (Cloud fix)
-try:
-    import openpyxl
-except ModuleNotFoundError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "openpyxl"])
-    import openpyxl  # import lại sau khi cài
-
 import pandas as pd
+from datetime import datetime, timedelta
 
 # CẤU HÌNH CHUYÊN KHOA & BÁC SĨ
 chuyen_khoa = {
@@ -61,7 +50,7 @@ def dfs_xep_lich_benh_nhan(ten_bn, quy_trinh, bat_dau, lich_hien_tai):
 st.set_page_config(page_title="Hệ thống đặt lịch khám DFS", layout="centered")
 
 st.markdown("""
-<h2 style='text-align:center;color:#007BFF;'>🏥 XẾP LỊCH KHÁM BỆNH</h2>
+<h2 style='text-align:center;color:#007BFF;'>🏥 XẾP LỊCH KHÁM BỆNH </h2>
 <p style='text-align:center;color:#444;'>Ứng dụng thuật toán tìm kiếm DFS trong xếp lịch khám bệnh.</p>
 """, unsafe_allow_html=True)
 
@@ -101,17 +90,6 @@ if st.button("📅 Xếp lịch"):
     ])
     st.success(f"✅ Đã xếp lịch thành công cho **{ten}**")
     st.dataframe(df, use_container_width=True)
-
-    # Xuất Excel bằng BytesIO (chuẩn web Streamlit Cloud)
-    buffer = BytesIO()
-    df.to_excel(buffer, index=False, engine='openpyxl')
-    buffer.seek(0)
-    st.download_button(
-        "⬇️ Tải file Excel",
-        buffer,
-        file_name=f"Lich_kham_{ten.replace(' ', '_')}.xlsx",
-        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    )
 
 st.divider()
 st.caption("© 2025 - Ứng dụng xếp lịch DFS")

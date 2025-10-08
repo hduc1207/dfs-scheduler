@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hệ thống xếp lịch khám bệnh (DFS)</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</head>
+
+<body class="bg-gradient-to-b from-blue-50 to-blue-100 min-h-screen flex flex-col items-center py-8">
+
+  <div class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-lg border border-blue-200">
+    <h1 class="text-3xl font-bold text-blue-700 mb-6 text-center">🩺 HỆ THỐNG XẾP LỊCH KHÁM (DFS)</h1>
+
+    <div class="space-y-4">
+      <div>
+        <label class="block font-semibold mb-1">Tên bệnh nhân</label>
+        <input id="name" class="input" placeholder="Nhập tên bệnh nhân..." />
+      </div>
+
+      <div>
+        <label class="block font-semibold mb-1">Giờ bắt đầu</label>
+        <input id="start" type="datetime-local" class="input" />
+      </div>
+
+      <div>
+        <label class="block font-semibold mb-1">Tình trạng</label>
+        <select id="status" class="input">
+          <option value="thuong">Bình thường</option>
+          <option value="capcuu">Cấp cứu ⚠️</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block font-semibold mb-1">Chọn quy trình khám</label>
+        <select id="process" class="input">
+          <option value="0">Nội tổng quát → Tim mạch → Tai Mũi Họng</option>
+          <option value="1">Tim mạch → Nội tổng quát</option>
+          <option value="2">Tai Mũi Họng</option>
+        </select>
+      </div>
+
+      <button onclick="schedulePatient()" class="btn-primary w-full">📅 Xếp lịch khám</button>
+      <button onclick="showAllSchedules()" class="btn-secondary w-full">🩻 Xem lịch bác sĩ</button>
+      <button onclick="exportToExcel()" class="btn-green w-full">📂 Xuất Excel</button>
+    </div>
+  </div>
+
+  <div id="result" class="mt-8 w-full max-w-lg"></div>
+
+  <footer class="mt-10 text-sm text-gray-500">© 2025 Hệ thống xếp lịch DFS | Thiết kế bởi Huy & GPT-5</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

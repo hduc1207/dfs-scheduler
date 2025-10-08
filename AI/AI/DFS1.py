@@ -50,7 +50,7 @@ def dfs_xep_lich_benh_nhan(ten_bn, quy_trinh, bat_dau, lich_hien_tai):
 st.set_page_config(page_title="Hệ thống đặt lịch khám DFS", layout="centered")
 
 st.markdown("""
-<h2 style='text-align:center;color:#007BFF;'>🏥 XẾP LỊCH KHÁM BỆNH </h2>
+<h2 style='text-align:center;color:#007BFF;'>🏥 XẾP LỊCH KHÁM BỆNH</h2>
 <p style='text-align:center;color:#444;'>Ứng dụng thuật toán tìm kiếm DFS trong xếp lịch khám bệnh.</p>
 """, unsafe_allow_html=True)
 
@@ -71,10 +71,17 @@ quy_trinh_mau = [
 st.markdown("### 🧾 Nhập thông tin bệnh nhân")
 
 ten = st.text_input("Họ tên bệnh nhân:")
+
 chon = st.selectbox("Chọn quy trình khám:", range(len(quy_trinh_mau)),
                     format_func=lambda i: " → ".join(quy_trinh_mau[i]))
+
 ngay = st.date_input("Ngày khám:", datetime.now().date())
-gio = st.time_input("Giờ bắt đầu:", datetime.now().time())
+if "gio_bat_dau" not in st.session_state:
+    st.session_state.gio_bat_dau = datetime.now().time()
+
+gio = st.time_input("Giờ bắt đầu:", value=st.session_state.gio_bat_dau)
+st.session_state.gio_bat_dau = gio
+
 bat_dau = datetime.combine(ngay, gio)
 
 if st.button("📅 Xếp lịch"):

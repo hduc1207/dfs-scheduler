@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
+from io import BytesIO
 
 # ===============================
 # CẤU HÌNH CHUYÊN KHOA & BÁC SĨ
@@ -60,7 +61,7 @@ def dfs_xep_lich_benh_nhan(ten_bn, quy_trinh, bat_dau, lich_hien_tai):
 st.set_page_config(page_title="Hệ thống đặt lịch khám DFS", layout="centered")
 
 st.markdown("""
-<h2 style='text-align:center;color:#007BFF;'>🏥 HỆ THỐNG XẾP LỊCH KHÁM BỆNH (DFS)</h2>
+<h2 style='text-align:center;color:#007BFF;'>🏥 XẾP LỊCH KHÁM BỆNH </h2>
 <p style='text-align:center;color:#444;'>Ứng dụng thuật toán tìm kiếm DFS trong xếp lịch khám bệnh.</p>
 """, unsafe_allow_html=True)
 
@@ -78,7 +79,7 @@ quy_trinh_mau = [
     ["Da liễu", "Nội tổng quát"]
 ]
 
-st.markdown("### 🧾 Nhập thông tin bệnh nhân")
+st.markdown("###  Nhập thông tin bệnh nhân")
 
 ten = st.text_input("Họ tên bệnh nhân:")
 chon = st.selectbox("Chọn quy trình khám:", range(len(quy_trinh_mau)),
@@ -101,11 +102,16 @@ if st.button("📅 Xếp lịch"):
     st.success(f"✅ Đã xếp lịch thành công cho **{ten}**")
     st.dataframe(df, use_container_width=True)
 
-    # Xuất Excel
-    ten_file = f"Lich_kham_{ten.replace(' ', '_')}.xlsx"
-    df.to_excel(ten_file, index=False)
-    with open(ten_file, "rb") as f:
-        st.download_button("⬇️ Tải file Excel", f, file_name=ten_file, mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    # Xuất Excel trực tiếp bằng BytesIO
+    buffer = BytesIO()
+    df.to_excel(buffer, index=False, engine='openpyxl')
+    buffer.seek(0)
+    st.download_button(
+        "⬇️ Tải file Excel",
+        buffer,
+        file_name=f"Lich_kham_{ten.replace(' ', '_')}.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
 
 st.divider()
-st.caption("© 2025 - Ứng dụng xếp lịch DFS bằng Python & Streamlit")
+st.caption("© 2025 - Ứng dụng xếp lịch DFS")

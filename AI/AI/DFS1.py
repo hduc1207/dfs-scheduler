@@ -1,7 +1,17 @@
 import streamlit as st
-import pandas as pd
+import subprocess
+import sys
 from datetime import datetime, timedelta
 from io import BytesIO
+
+# Cài openpyxl nếu chưa có (Cloud fix)
+try:
+    import openpyxl
+except ModuleNotFoundError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "openpyxl"])
+    import openpyxl  # import lại sau khi cài
+
+import pandas as pd
 
 # CẤU HÌNH CHUYÊN KHOA & BÁC SĨ
 chuyen_khoa = {
@@ -49,8 +59,9 @@ def dfs_xep_lich_benh_nhan(ten_bn, quy_trinh, bat_dau, lich_hien_tai):
 
 # GIAO DIỆN STREAMLIT
 st.set_page_config(page_title="Hệ thống đặt lịch khám DFS", layout="centered")
+
 st.markdown("""
-<h2 style='text-align:center;color:#007BFF;'>🏥 XẾP LỊCH KHÁM BỆNH </h2>
+<h2 style='text-align:center;color:#007BFF;'>🏥 XẾP LỊCH KHÁM BỆNH</h2>
 <p style='text-align:center;color:#444;'>Ứng dụng thuật toán tìm kiếm DFS trong xếp lịch khám bệnh.</p>
 """, unsafe_allow_html=True)
 

@@ -1,24 +1,80 @@
-.input {
-  @apply w-full border border-blue-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400 outline-none;
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #f7fbff, #e3f2fd);
+  color: #1a237e;
+  margin: 0;
+  padding: 0;
 }
 
-.btn-primary {
-  @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition;
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px 40px;
 }
 
-.btn-secondary {
-  @apply bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition;
+h1 {
+  text-align: center;
+  color: #0d47a1;
+  margin-bottom: 20px;
 }
 
-.btn-green {
-  @apply bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+label {
+  font-weight: bold;
 }
 
-.animate-fadeIn {
-  animation: fadeIn 0.4s ease-in-out;
+input, select, button {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #90caf9;
+  font-size: 16px;
+}
+
+button {
+  background-color: #0d47a1;
+  color: white;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #1565c0;
+}
+
+h2 {
+  margin-top: 30px;
+  color: #1976d2;
+}
+
+.schedule-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.card {
+  flex: 1 1 250px;
+  background: #e3f2fd;
+  border-left: 6px solid #1565c0;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  color: #0d47a1;
+}
+
+.card p {
+  margin: 4px 0;
 }
